@@ -41,6 +41,15 @@ pipeline {
 			
 		}
 
+	   stage('Kubernetes Deployment of DevSecOps Application') {
+		   steps {
+			   withKubeConfig([credentialId: 'kubelogin']) {
+				   sh('kubectl delete all --all -n devsecops')
+				   sh('kubectl apply -f deployment.yaml --namespace=devsecops)
+					  }
+					}
+				}
+
 			
   }
 }
